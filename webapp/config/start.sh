@@ -17,8 +17,12 @@ if [ "$PRODUCTION" == "true" ]; then
     # Django will see that the tables for the initial migrations already exist
     # and mark them as applied without running them. (Django won’t check that the
     # table schema match your models, just that the right table names exist).
+    ls srv
     echo "==> Django setup, executing: migrate"
-    python3 /srv/${DJANGO_PROJECT_NAME}/manage.py migrate --fake-initial
+    python3 /srv/${DJANGO_PROJECT_NAME}/manage.py makemigrations users
+
+    echo "The users thing worked"
+    python3 /srv/${DJANGO_PROJECT_NAME}/manage.py migrate
 
     # Django: collectstatic
     #
